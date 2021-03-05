@@ -1,7 +1,7 @@
 import './Container.scss';
 import DevTabs from '../Component/Devtabs/Devtabs';
 
-const container = () => {
+const container = (props) => {
 
     return (
         <div className="container">
@@ -15,7 +15,7 @@ const container = () => {
                     Manage Campaigns
                 </span>
                 <div className="main-container">
-                    <DevTabs></DevTabs>
+                    <DevTabs tabData={props.tabData} selectedTab={props.tabClickEvent}></DevTabs>
                 </div>
             </div>
         </div>
