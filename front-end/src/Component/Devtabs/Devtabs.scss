@@ -1,7 +1,6 @@
 .dev-tabs-container {
 
     .tabs-wrapper {
-
         width: 100%;
         height: 40px;
         margin: 0px;
@@ -11,14 +10,18 @@
             display: inline;
             padding: 10px 20px;
             font-weight: 500;
+            margin: 0 5px;
             &:hover {
-                color: red;
-                border-bottom: 1px solid red;
+                color: #0369AC;
+                border-bottom: 1px solid #0369AC;
                 cursor: pointer;
+                opacity: 0.8;
             }
             &.active {
-                color: red;
-                border-bottom: 2px solid red;
+                color: #0369AC;
+                border-bottom: 2px solid #0369AC;
+                pointer-events: none;
+                cursor: none;
             }
         }
     }
