@@ -21,10 +21,12 @@ class DevTable extends Component {
     svgText = (texts) => {
         return (
             <div>
-                {texts.svgName === 'dollar'?<span>$</span> 
+                { 
+                texts.svgName === 'dollar'?<span>$</span> 
                 : texts.svgName === 'file' ? <span>file</span>
                 : texts.svgName === 'report'? <span>report</span>
-                : texts.svgName === 'date' ? <span>date</span>: null }
+                : texts.svgName === 'date' ? <span>date</span>: null 
+                }
                 <span>{texts.value}</span>
             </div>
         )
@@ -56,7 +58,7 @@ class DevTable extends Component {
                         value: {
                             upperData: 'Rahul',
                             lowerData: 'singh',
-                            imgPath: ''
+                            imgPath: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80'
                         }
                     },
     
@@ -76,18 +78,17 @@ class DevTable extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
                         {
                             tableData.data.map((data, index)=>(
-                                tableData.header.map((header)=>(
-                                    <td>
-                                        {this.doubleText(data[header.field].value)}
-                                        
-                                    </td>
-                                ))
+                                <tr>
+                                    {tableData.header.map((header)=>(
+                                        <td>
+                                            {this.doubleText(data[header.field].value)}
+                                        </td>
+                                    ))}
+                                </tr>
                             ))
                         }
-                    </tr>
                 </tbody>
             </table>
         );
