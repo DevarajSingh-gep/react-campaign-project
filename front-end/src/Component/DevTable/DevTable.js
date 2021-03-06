@@ -32,6 +32,10 @@ class DevTable extends Component {
         return {name: date.toDateString(), region: this.dateToTime(date)};
     }
 
+    showAlert = (message) => {
+        alert(message);
+    }
+
     svgText = (texts) => {
         return (
             <div>
@@ -127,12 +131,15 @@ class DevTable extends Component {
                                     }
                                 </td>
                                 <td className="column-cell">
-                                    <div className="icon-text">View Pricing</div>
+                                    <div className="icon-text" onClick={() => this.showAlert(data.price)}>View Pricing</div>
                                 </td>
                                 <td className="column-cell">
-                                    <div className="icon-text">CSV</div>
-                                    <div className="icon-text">REPORT</div>
-                                    <div className="icon-text">SCHEDULE AGAIN</div>
+                                    <div className="icon-text" onClick={() => this.showAlert(data.csv)}>CSV</div>
+                                    <div className="icon-text" onClick={() => this.showAlert(data.report)}>REPORT</div>
+                                    <div className="icon-text">
+                                        SCHEDULE AGAIN
+                                        <input className="date-input" type="date" />
+                                    </div>
                                 </td>
                             </tr>
                         ))
