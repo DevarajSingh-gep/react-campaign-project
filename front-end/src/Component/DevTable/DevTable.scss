@@ -1,3 +1,24 @@
 .DevTable {
-    
+    width: 100%;
+
+    .double-text-container {
+        display: grid;
+        grid-template-areas: "img uppertext" "img lowertext" ;
+        .image-section {
+            grid-area: img;
+            .double-text-img {
+                width: 40px;
+            }
+        }
+        .upper-text {
+            grid-area: uppertext;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .lower-text {
+            grid-area: lowertext;
+            font-size: 12px;
+        }
+    }
 }
