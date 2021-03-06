@@ -17,6 +17,21 @@ class DevTable extends Component {
             )
     }
 
+    dateToTime = (date) => {
+        var minutes = date.getMinutes();
+        var hours = date.getHours() % 12;
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+
+    digitToDateAndTime = (digits) => {
+        var date = new Date(parseInt(digits));
+        return {name: date.toDateString(), region: this.dateToTime(date)};
+    }
+
     svgText = (texts) => {
         return (
             <div>
@@ -102,8 +117,9 @@ class DevTable extends Component {
                         tableData.data.map((data)=>(
                             <tr>
                                 <td className="column-cell">
-                                    <p className="upper-text">oct 2020, 28</p>
-                                    <p className="lower-text">5 days ago</p>
+                                    {
+                                        this.doubleText(this.digitToDateAndTime(data.createdOn))
+                                    }
                                 </td>
                                 <td className="column-cell">
                                     {
