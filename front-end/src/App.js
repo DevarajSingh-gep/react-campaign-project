@@ -42,9 +42,9 @@ class App extends Component {
   render() {
 
     return (
-      <div>
+      <>
         <Container tabData={this.state.tabs} tabClickEvent={this.tabHandlerClick}></Container>
-      </div>
+      </>
     );
   }
 }
