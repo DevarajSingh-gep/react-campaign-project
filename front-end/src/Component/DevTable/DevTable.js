@@ -17,19 +17,44 @@ class DevTable extends Component {
             )
     }
 
-    dateToTime = (date) => {
-        var minutes = date.getMinutes();
-        var hours = date.getHours() % 12;
-        var ampm = hours >= 12 ? 'pm' : 'am';
-        hours = hours ? hours : 12;
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        var strTime = hours + ':' + minutes + ' ' + ampm;
-        return strTime;
+    timeDifference = (previous) => {
+        var current = new Date();
+        var msPerMinute = 60 * 1000;
+        var msPerHour = msPerMinute * 60;
+        var msPerDay = msPerHour * 24;
+        var msPerMonth = msPerDay * 30;
+        var msPerYear = msPerDay * 365;
+    
+        var elapsed = current - previous;
+    
+        if (elapsed < msPerMinute) {
+             return Math.round(elapsed/1000) + ' seconds ago';   
+        }
+    
+        else if (elapsed < msPerHour) {
+             return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+        }
+    
+        else if (elapsed < msPerDay ) {
+             return Math.round(elapsed/msPerHour ) + ' hours ago';   
+        }
+    
+        else if (elapsed < msPerMonth) {
+            return Math.round(elapsed/msPerDay) + ' days ago';   
+        }
+    
+        else if (elapsed < msPerYear) {
+            return Math.round(elapsed/msPerMonth) + ' months ago';   
+        }
+    
+        else {
+            return Math.round(elapsed/msPerYear ) + ' years ago';   
+        }
     }
 
     digitToDateAndTime = (digits) => {
         var date = new Date(parseInt(digits));
-        return {name: date.toDateString(), region: this.dateToTime(date)};
+        return {name: date.toDateString(), region: this.timeDifference(date)};
     }
 
     showAlert = (message) => {
@@ -69,7 +94,7 @@ class DevTable extends Component {
             data:[{
                 "name": "Test Whatsapp",
                 "region": "US",
-                "createdOn": 1559807714999,
+                "createdOn": 1614699804000,
                 "price": "Price info of Test Whatsapp",
                 "csv": "Some CSV link for Whatsapp",
                 "report": "Some report link for Whatsapp",
