@@ -12,14 +12,14 @@
             font-weight: 500;
             margin: 0 5px;
             &:hover {
-                color: #0369AC;
-                border-bottom: 1px solid #0369AC;
+                color: #8EAD29;
+                border-bottom: 1px solid #8EAD29;
                 cursor: pointer;
                 opacity: 0.8;
             }
             &.active {
-                color: #0369AC;
-                border-bottom: 2px solid #0369AC;
+                color: #8EAD29;
+                border-bottom: 2px solid #8EAD29;
                 pointer-events: none;
                 cursor: none;
             }

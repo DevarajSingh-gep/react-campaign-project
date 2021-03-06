@@ -3,18 +3,17 @@ import './DevTable.scss';
 
 class DevTable extends Component {
 
-    doubleText = (texts) => {
+    doubleText = (data) => {
             return (
-                <div className="double-text-container">
+                <>
                     {
-                        texts.imgPath?
-                        <span className="image-section">
-                            <img className="double-text-img" src={texts.imgPath} />
-                        </span>:null
+                        data.image_url?
+                            <img src={data.image_url} />
+                        :null
                     }
-                    <span className="upper-text">{texts.upperData}</span>
-                    <span className="lower-text">{texts.lowerData}</span>
-                </div>
+                    <div className="upper-text">{data.name}</div>
+                    <div className="lower-text">{data.region}</div>
+                </>
             )
     }
 
@@ -36,61 +35,95 @@ class DevTable extends Component {
         const tableData = {
             header: [
                 {
-                    name: 'Date',
-                    field: 'date',
+                    name: 'Date'
                 },
                 {
-                    name: 'Campaign',
-                    field: 'date',
+                    name: 'Campaign'
                 },
                 {
-                    name: 'View',
-                    field: 'date',
+                    name: 'View'
                 },
                 {
-                    name: 'Action',
-                    field: 'date',
+                    name: 'Action'
                 }
             ],
-            data:[
-                {
-                    date: {
-                        value: {
-                            upperData: 'Rahul',
-                            lowerData: 'singh',
-                            imgPath: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80'
-                        }
-                    },
-    
-                },
+            data:[{
+                "name": "Test Whatsapp",
+                "region": "US",
+                "createdOn": 1559807714999,
+                "price": "Price info of Test Whatsapp",
+                "csv": "Some CSV link for Whatsapp",
+                "report": "Some report link for Whatsapp",
+                "image_url":"https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80" 
+              },
+              {
+                "name": "Super Jewels Quest",
+                "region": "CA, FR",
+                "createdOn": 1559806715124,
+                "price": "Price info of Super Jewels Quest",
+                "csv": "Some CSV link for Super Jewels Quest",
+                "report": "Some report link for Super Jewels Ques",
+                "image_url":"https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80"
+              },
+              {
+                "name": "Mole Slayer",
+                "region": "FR",
+                "createdOn": 1559806711124,
+                "price": "Price info of Mole Slayer",
+                "csv": "Some CSV link for Mole Slayer",
+                "report": "Some report link for Mole Slayer",
+                "image_url":"https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80"
+              },
+              {
+                "name": "Mancala Mix",
+                "region": "JP",
+                "createdOn": 1559806680124,
+                "price": "Price info of Mancala Mix",
+                "csv": "Some CSV link for Mancala Mix",
+                "report": "Some report link for Mancala Mix",
+                "image_url":"https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80"
+              }
             ]
         };
 
         return(
-            <table className="DevTable">
-                <thead>
+            <table className="dev-table">
+                <thead>    
                     <tr>
                         {
                             tableData.header.map(headerData=>(
-                                <th>{headerData.name}</th>
+                                <th className="header-cell">{headerData.name}</th>
                             ))
                         }
                     </tr>
                 </thead>
                 <tbody>
-                        {
-                            tableData.data.map((data, index)=>(
-                                <tr>
-                                    {tableData.header.map((header)=>(
-                                        <td>
-                                            {this.doubleText(data[header.field].value)}
-                                        </td>
-                                    ))}
-                                </tr>
-                            ))
-                        }
+                    {
+                        tableData.data.map((data)=>(
+                            <tr>
+                                <td className="column-cell">
+                                    <p className="upper-text">oct 2020, 28</p>
+                                    <p className="lower-text">5 days ago</p>
+                                </td>
+                                <td className="column-cell">
+                                    {
+                                        this.doubleText(data)
+                                    }
+                                </td>
+                                <td className="column-cell">
+                                    <div className="icon-text">View Pricing</div>
+                                </td>
+                                <td className="column-cell">
+                                    <div className="icon-text">CSV</div>
+                                    <div className="icon-text">REPORT</div>
+                                    <div className="icon-text">SCHEDULE AGAIN</div>
+                                </td>
+                            </tr>
+                        ))
+                    }
                 </tbody>
             </table>
+
         );
     }
 }
