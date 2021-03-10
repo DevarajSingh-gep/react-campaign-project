@@ -27,6 +27,16 @@ class DevTable extends Component {
         return strTime;
     }
 
+    dateToTimestemp =() => {
+        let days = Math.floor(Math.random() * 10); 
+        let date = new Date(Date.now() - (days * 24 * 60 * 60 * 1000));
+        let month = date.getMonth();
+        let day = date.getDate();
+        let year = date.getFullYear();
+        let today = year + '-' + month + '-' + day;
+        return new Date(today).getTime();
+    }
+
     digitToDateAndTime = (digits) => {
         var date = new Date(parseInt(digits));
         return {name: date.toDateString(), region: this.dateToTime(date)};
@@ -49,6 +59,10 @@ class DevTable extends Component {
             </div>
         )
     }
+
+    handleChange =(event) => {
+        console.log(event.target.value); 
+        }
     
     render() {
         const tableData = {
@@ -104,6 +118,7 @@ class DevTable extends Component {
               }
             ]
         };
+        console.log(this.dateToTimestemp()/1000);
 
         return(
             <table className="dev-table">
@@ -138,7 +153,9 @@ class DevTable extends Component {
                                     <div className="icon-text" onClick={() => this.showAlert(data.report)}>REPORT</div>
                                     <div className="icon-text">
                                         SCHEDULE AGAIN
-                                        <input className="date-input" type="date" />
+                                        <input className="date-input" type="date" 
+                                        dateFormat="yyyy/MM/dd" 
+                                        onChange={this.handleChange}/>
                                     </div>
                                 </td>
                             </tr>
@@ -146,7 +163,6 @@ class DevTable extends Component {
                     }
                 </tbody>
             </table>
-
         );
     }
 }
