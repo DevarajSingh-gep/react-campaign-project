@@ -3,7 +3,7 @@ import DevTabs from '../Component/Devtabs/Devtabs';
 import DevTable from '../Component/DevTable/DevTable';
 
 const container = (props) => {
-
+    console.log(props.tableConfig);
     return (
         <div className="container">
             <header className="header">
@@ -17,7 +17,7 @@ const container = (props) => {
                 </span>
                 <div className="main-container">
                     <DevTabs tabData={props.tabData} selectedTab={props.tabClickEvent}></DevTabs>
-                    <DevTable></DevTable>
+                    <DevTable data={props.tableConfig} changeCampaignDate={props.campaignHandler}></DevTable>
                 </div>
             </div>
         </div>
