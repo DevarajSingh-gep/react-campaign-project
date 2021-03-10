@@ -104,9 +104,8 @@ class DevTable extends Component {
                                     <div className="icon-text" onClick={() => this.showAlert(data.report)}>REPORT</div>
                                     <div className="icon-text">
                                         SCHEDULE AGAIN
-                                        <input className="date-input" type="date" 
-                                        dateFormat="yyyy/MM/dd" 
-                                        onChange={this.props.changeCampaignDate}/>
+                                        <input className="date-input" type="date"  value={new Date(data.createdOn)}
+                                        onChange={(event)=>this.props.changeCampaignDate(event, data.id)}/>
                                     </div>
                                 </td>
                             </tr>

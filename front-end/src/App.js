@@ -37,6 +37,7 @@ class App extends Component {
               }
           ],
           data:[{
+              "id": 1,
               "name": "Test Whatsapp",
               "region": "US",
               "createdOn": 1615982744000,
@@ -46,6 +47,7 @@ class App extends Component {
               "image_url":"https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80" 
             },
             {
+              "id": 2,
               "name": "Super Jewels Quest",
               "region": "CA, FR",
               "createdOn": 1615982744000,
@@ -55,6 +57,7 @@ class App extends Component {
               "image_url":"https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80"
             },
             {
+              "id": 3,
               "name": "Mole Slayer",
               "region": "FR",
               "createdOn": 1615982744000,
@@ -64,6 +67,7 @@ class App extends Component {
               "image_url":"https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80"
             },
             {
+              "id": 4,
               "name": "Mancala Mix",
               "region": "JP",
               "createdOn": 1610280344000,
@@ -73,6 +77,7 @@ class App extends Component {
               "image_url":"https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80"
             },
             {
+              "id": 5,
               "name": "Mancala Mix",
               "region": "JP",
               "createdOn": 1610885144000,
@@ -82,6 +87,7 @@ class App extends Component {
               "image_url":"https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80"
             },
             {
+              "id": 6,
               "name": "Mancala Mix",
               "region": "JP",
               "createdOn": 1615377944000,
@@ -154,8 +160,8 @@ class App extends Component {
     }
   }
 
-  campaignHandler = (event) => {
-    console.log(event.target.value); 
+  campaignHandler = (event, id) => {
+    console.log(event.target.value, "id", id); 
   }
 
   render() {
