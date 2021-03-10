@@ -162,6 +162,9 @@ class App extends Component {
 
   campaignHandler = (event, id) => {
     console.log(event.target.value, "id", id); 
+    let modifiedData = [...this.state.tableData.data];
+    modifiedData[id - 1].createdOn = new Date(event.target.value).getTime();
+    this.setState(modifiedData);
   }
 
   render() {
