@@ -29,31 +29,36 @@ class DevTable extends Component {
         var msPerDay = msPerHour * 24;
         var msPerMonth = msPerDay * 30;
         var msPerYear = msPerDay * 365;
+        var presentOrFuture = ""
     
         var elapsed = current - previous;
     
+        elapsed > 0 ? presentOrFuture = "ago" : elapsed < 0 ? presentOrFuture = "within" : presentOrFuture = "today"
+        
+        elapsed = Math.abs(elapsed);
+
         if (elapsed < msPerMinute) {
-             return Math.round(elapsed/1000) + ' seconds ago';   
+             return Math.round(elapsed/1000) + ' seconds ' + presentOrFuture;   
         }
     
         else if (elapsed < msPerHour) {
-             return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+             return Math.round(elapsed/msPerMinute) + ' minutes ' + presentOrFuture;   
         }
     
         else if (elapsed < msPerDay ) {
-             return Math.round(elapsed/msPerHour ) + ' hours ago';   
+             return Math.round(elapsed/msPerHour ) + ' hours ' + presentOrFuture; 
         }
     
         else if (elapsed < msPerMonth) {
-            return Math.round(elapsed/msPerDay) + ' days ago';   
+            return Math.round(elapsed/msPerDay) + ' days ' + presentOrFuture;   
         }
     
         else if (elapsed < msPerYear) {
-            return Math.round(elapsed/msPerMonth) + ' months ago';   
+            return Math.round(elapsed/msPerMonth) + ' months ' + presentOrFuture;   
         }
     
         else {
-            return Math.round(elapsed/msPerYear ) + ' years ago';   
+            return Math.round(elapsed/msPerYear ) + ' years ' + presentOrFuture;   
         }
     }
 
