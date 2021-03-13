@@ -1,0 +1,22 @@
+{
+  "name": "campaign-project",
+  "version": "1.0.0",
+  "description": "campaign project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node back-end/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevarajSingh-gep/react-campaign-project.git"
+  },
+  "author": "Devaraj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DevarajSingh-gep/react-campaign-project/issues"
+  },
+  "homepage": "https://github.com/DevarajSingh-gep/react-campaign-project#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
