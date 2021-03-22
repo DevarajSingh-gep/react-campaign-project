@@ -1,8 +1,11 @@
-import { Link, Route, Switch, useLocation } from "react-router-dom";
+import React, { lazy, Suspense} from 'react';
+import { Link, Route, Switch, useLocation, Redirect } from "react-router-dom";
 import './Container.scss';
 import DevTabs from '../Component/Devtabs/Devtabs';
 import DevTable from '../Component/DevTable/DevTable';
-import Create from '../Component/Create/Create';
+
+
+const CreateComponent = lazy(()=> import('../Component/Create/Create') );
 
 const Container = (props) => {
     console.log(props.tableConfig);
@@ -38,12 +41,15 @@ const Container = (props) => {
                 <div className="main-container">
                     <Switch>
                         <Route path="/create">
-                            <Create createCampaign={props.addNewItem}></Create>
+                            <Suspense fallback={<div>Loading.....</div>}>
+                                <CreateComponent createCampaign={props.addNewItem}/>
+                            </Suspense>
                         </Route>
-                        <Route path="/campaigns">
+                        <Route path="/campaigns" exact>
                             <DevTabs tabData={props.tabData} selectedTab={props.tabClickEvent}></DevTabs>
                             <DevTable data={props.tableConfig} changeCampaignDate={props.campaignHandler}></DevTable>
                         </Route>
+                        <Redirect from="/" to="/campaigns"/>
                     </Switch>
                 </div>
             </div>

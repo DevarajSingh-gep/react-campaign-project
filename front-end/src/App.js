@@ -172,6 +172,7 @@ class App extends Component {
                 addNewItem={this.addNewCampaign}></Container>: <spinner/>}
               </div>
            </Route>
+           
          </Switch>
       </Router>
     );
