@@ -9,9 +9,18 @@
         padding: 0 120px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         .headerText {
             color: white;
             font-size: 30px;
+        }
+        .header-right {
+            color: white;
+            display: flex;
+            li {
+                display: inline;
+                padding: 5px 15px;
+            }
         }
     }
     .body-container {

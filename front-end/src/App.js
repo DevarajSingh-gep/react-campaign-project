@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import Container from './Container/Container';
 import axios from 'axios';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  withRouter
+} from "react-router-dom";
 import './App.css';
+import { Redirect } from "react-router-dom";
+import spinner from './Component/Spinner/Spinner';
 
 class App extends Component {
 
@@ -10,15 +18,15 @@ class App extends Component {
       this.state = {
         tabs: [
             {
-                name: 'Upcomming Compaigns',
+                name: 'Upcomming campaigns',
                 isActive: true
             },
             {
-                name: 'Live Compaigns',
+                name: 'Live campaigns',
                 isActive: false
             },
             {
-                name: 'Past Compaigns',
+                name: 'Past campaigns',
                 isActive: false
             }
         ],
@@ -51,6 +59,11 @@ class App extends Component {
       tableData.data = res.data;
       this.setState({
         tableData: tableData
+      })
+    })
+    .catch(error=>{
+      this.setState({
+        tableData: []
       })
     })
   }
@@ -98,11 +111,11 @@ class App extends Component {
   getDataAccordingToCampaign = () => {
     let tempCampaignData = this.state.tableData.data.filter((data)=>{
       const campaignTracker = this.findTheCampaignDay(data);
-      if( campaignTracker === 1  && this.state.tabs[this.activeIndex].name === 'Upcomming Compaigns') {
+      if( campaignTracker === 1  && this.state.tabs[this.activeIndex].name === 'Upcomming campaigns') {
         return true;
-      } else if(campaignTracker === 0  && this.state.tabs[this.activeIndex].name === 'Live Compaigns') {
+      } else if(campaignTracker === 0  && this.state.tabs[this.activeIndex].name === 'Live campaigns') {
         return true
-      } else if(campaignTracker === -1  && this.state.tabs[this.activeIndex].name === 'Past Compaigns') {
+      } else if(campaignTracker === -1  && this.state.tabs[this.activeIndex].name === 'Past campaigns') {
         return true
       }
     })
@@ -119,15 +132,48 @@ class App extends Component {
     this.setState(modifiedData);
   }
 
+  addNewCampaign = (name, countryCode, date) => {
+    console.log(name, countryCode, date);
+    let campaignNumber = this.state.tableData.data.length;
+    let newCampaign = {
+              "id": campaignNumber + 1,
+              "name": name,
+              "region": countryCode,
+              "createdOn": new Date(date).getTime(),
+              "price": "Price info of Test Whatsapp",
+              "csv": "Some CSV link for Whatsapp",
+              "report": "Some report link for Whatsapp",
+              "image_url": "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80"
+          };
+    console.log(newCampaign);
+    let [ ...data ] = [...this.state.tableData.data];
+    data = [...data, newCampaign];
+    console.log(data);
+    this.setState({
+      tableData: {...this.state.tableData, data: data}
+    })
+
+  }
+
   render() {
 
     return (
-      <div>
-        {this.state.tableData.data != null ?<Container tabData={this.state.tabs} 
-        tableConfig={this.getDataAccordingToCampaign()} 
-        tabClickEvent={this.tabHandlerClick}
-        campaignHandler={this.campaignHandler}></Container>: "Sorry Wait for a moment....."}
-      </div>
+      <Router>
+         <Switch>
+         <Route path="/login">
+           <h1>Hello</h1>
+         </Route>
+           <Route path="/">
+              <div>
+                {this.state.tableData.data != null ?<Container tabData={this.state.tabs} 
+                tableConfig={this.getDataAccordingToCampaign()} 
+                tabClickEvent={this.tabHandlerClick}
+                campaignHandler={this.campaignHandler}
+                addNewItem={this.addNewCampaign}></Container>: <spinner/>}
+              </div>
+           </Route>
+         </Switch>
+      </Router>
     );
   }
 }
