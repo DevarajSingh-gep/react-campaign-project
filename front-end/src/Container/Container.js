@@ -1,5 +1,5 @@
 import React, { lazy, Suspense} from 'react';
-import { Link, Route, Switch, useLocation, Redirect } from "react-router-dom";
+import { Link, Route, Switch, useLocation, Redirect, useRouteMatch } from "react-router-dom";
 import './Container.scss';
 import DevTabs from '../Component/Devtabs/Devtabs';
 import DevTable from '../Component/DevTable/DevTable';
@@ -8,6 +8,8 @@ import DevTable from '../Component/DevTable/DevTable';
 const CreateComponent = lazy(()=> import('../Component/Create/Create') );
 
 const Container = (props) => {
+    let { path, url } = useRouteMatch();
+    console.log(path,":   url  :" ,url);
     console.log(props.tableConfig);
     const location = useLocation();
     return (

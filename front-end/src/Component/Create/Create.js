@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 import './Create.scss';
 import Button from '../UI/Button/Button';
@@ -37,6 +37,9 @@ const initialState = {
 const Details = (props)=> {
     const [state, setstate] = useState(initialState);
     let history = useHistory();
+
+    let { path, url } = useRouteMatch();
+    console.log(path,":   url  :" ,url);
 
     const inputChangedHandler = useCallback(
         (event, id) => {

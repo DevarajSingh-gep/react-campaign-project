@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/DevarajSingh-gep/react-campaign-project#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "concurrently": "^6.0.0",
