@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import './Devtabs.scss';
 
 class DevTabs extends Component {
@@ -17,7 +18,7 @@ class DevTabs extends Component {
                 <ul className="tabs-wrapper">
                     { this.tabs.map( (tab, index)=> (
                             <li key={tab.name} className={ tab.isActive ? "tab active" : "tab" } 
-                            onClick={ () => this.props.selectedTab(tab, index) }> 
+                            onClick={ () => this.props.tabChange(index) }> 
                                 {tab.name}
                             </li>
                         ) 
@@ -29,4 +30,10 @@ class DevTabs extends Component {
 
 }
 
-export default DevTabs;
+const mapDispatchToProps = dispatch => {
+    return{
+      tabChange: (index)=> dispatch({type: 'CHANGE_TAB', payload: index}),
+    }
+  }
+
+export default connect(null,mapDispatchToProps)(DevTabs);

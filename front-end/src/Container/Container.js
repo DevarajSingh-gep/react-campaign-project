@@ -1,17 +1,29 @@
-import React, { lazy, Suspense} from 'react';
+import React, { lazy, Suspense, useEffect} from 'react';
 import { Link, Route, Switch, useLocation, Redirect, useRouteMatch } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 import './Container.scss';
 import DevTabs from '../Component/Devtabs/Devtabs';
 import DevTable from '../Component/DevTable/DevTable';
+import {campaignsData} from '../Store/Action/CampaignAction';
 
 
 const CreateComponent = lazy(()=> import('../Component/Create/Create') );
 
 const Container = (props) => {
-    let { path, url } = useRouteMatch();
-    console.log(path,":   url  :" ,url);
-    console.log(props.tableConfig);
+
+    // const dispatch = useDispatch();
+
+    // const campaignList = useSelector(state => state.campaignList);
+
+    // const {loading, error, tabs, tableData} = campaignList;
+
     const location = useLocation();
+
+    // useEffect(()=> {
+    //     dispatch(campaignsData());
+    //     console.log(loading, error, tabs, tableData);
+    // }, [dispatch])
+
     return (
         <div className="container">
             <header className="header">
@@ -48,8 +60,8 @@ const Container = (props) => {
                             </Suspense>
                         </Route>
                         <Route path="/campaigns" exact>
-                            <DevTabs tabData={props.tabData} selectedTab={props.tabClickEvent}></DevTabs>
-                            <DevTable data={props.tableConfig} changeCampaignDate={props.campaignHandler}></DevTable>
+                            <DevTabs tabData={props.tabData}></DevTabs>
+                            {props.tableConfig.data != null ? <DevTable data={props.tableConfig} changeCampaignDate={props.campaignHandler}></DevTable> :"Data Note Found"}
                         </Route>
                         <Redirect from="/" to="/campaigns"/>
                     </Switch>

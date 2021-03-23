@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Container from './Container/Container';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,6 +11,7 @@ import {
 import './App.css';
 import { Redirect } from "react-router-dom";
 import spinner from './Component/Spinner/Spinner';
+import { campaignsData, tabChange } from './Store/Action/CampaignAction';
 
 class App extends Component {
 
@@ -50,37 +52,13 @@ class App extends Component {
       currentDate: new Date().getTime()
     }
     this.activeIndex = 0;
+    // console.log(this.props.tabs, this.props.tableData);
   }
 
   componentDidMount() {
     console.log('componentDidMount Run');
-    axios.get('/api/campaignData').then((res)=>{
-      let {tableData} = this.state;
-      tableData.data = res.data;
-      this.setState({
-        tableData: tableData
-      })
-    })
-    .catch(error=>{
-      this.setState({
-        tableData: []
-      })
-    })
-  }
+    this.props.campaignsData();
 
-  tabHandlerClick = (selectedtab, index) => {
-      const {tabs} = {...this.state}
-      tabs.map((tab, i)=>{
-          if(tabs[i].isActive) {
-              tabs[i].isActive = false;
-          }
-          if(i === index) {
-              tabs[i].isActive = true;
-              this.activeIndex = i;
-          }
-      });
-      console.log(tabs);
-      this.setState({tabs: tabs});
   }
 
   findTheCampaignDay = (data)=> {
@@ -109,18 +87,18 @@ class App extends Component {
   }
 
   getDataAccordingToCampaign = () => {
-    let tempCampaignData = this.state.tableData.data.filter((data)=>{
+    let tempCampaignData = this.props.tableData.data.filter((data)=>{
       const campaignTracker = this.findTheCampaignDay(data);
-      if( campaignTracker === 1  && this.state.tabs[this.activeIndex].name === 'Upcomming campaigns') {
+      if( campaignTracker === 1  && this.props.tabs[this.props.activeIndex].name === 'Upcomming campaigns') {
         return true;
-      } else if(campaignTracker === 0  && this.state.tabs[this.activeIndex].name === 'Live campaigns') {
+      } else if(campaignTracker === 0  && this.props.tabs[this.props.activeIndex].name === 'Live campaigns') {
         return true
-      } else if(campaignTracker === -1  && this.state.tabs[this.activeIndex].name === 'Past campaigns') {
+      } else if(campaignTracker === -1  && this.props.tabs[this.props.activeIndex].name === 'Past campaigns') {
         return true
       }
     })
     return {
-      header: this.state.tableData.header,
+      header: this.props.tableData.header,
       data: tempCampaignData
     }
   }
@@ -156,7 +134,8 @@ class App extends Component {
   }
 
   render() {
-
+    const {loading, error, tabs, tableData} = this.props;
+    console.log(loading, error, tabs, tableData);
     return (
       <Router>
          <Switch>
@@ -165,9 +144,8 @@ class App extends Component {
          </Route>
            <Route path="/">
               <div>
-                {this.state.tableData.data != null ?<Container tabData={this.state.tabs} 
+                {tableData.data != null ?<Container tabData={this.props.tabs} 
                 tableConfig={this.getDataAccordingToCampaign()} 
-                tabClickEvent={this.tabHandlerClick}
                 campaignHandler={this.campaignHandler}
                 addNewItem={this.addNewCampaign}></Container>: <spinner/>}
               </div>
@@ -179,4 +157,20 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    loading: state.campaignList.loading,
+    error: state.campaignList.error,
+    tabs: state.campaignList.tabs,
+    tableData: state.campaignList.tableData,
+    activeIndex: state.campaignList.activeIndex
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return{
+    campaignsData: () => dispatch(campaignsData())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
